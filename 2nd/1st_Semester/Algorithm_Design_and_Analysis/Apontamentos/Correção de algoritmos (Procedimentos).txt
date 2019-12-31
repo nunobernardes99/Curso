@@ -1,0 +1,22 @@
+Correção de algoritmos (Procedimentos)
+
+Pré-condição: Um predicado que descreva o estado incial (pré-execução).
+Pós-condição: Um predicado que descreva o estado final (pós-execução).
+
+O algoritmo está correto se for possível provar que se a pré-condição é verdadeira, a pós condição tem de ser verdadeira.
+	Pré-condição => Pós-condição
+
+Se o código tem ciclos:
+	Para provar que está correto (5 passos):
+
+		1) Escrever invariante do ciclo que capta o propósito do ciclo.
+		Chamar I(n). I(n) é o predicado que é verdade após a n interação do ciclo.
+
+		2) Mostrar que a pré-condição implica a invariante do ciclo I(0). (Caso Base)
+
+		3) Mostrar que se I(k) é verdade e que a condição de teste é verdadeira, então I(k+1) é verdade. (Passo de indução)
+		Noutras palavras, se I(n) for verdade para n=k e a condição de teste continuar verdadeira, então segue-se que I(n) é verdade para n=k+1.
+
+		4) Mostrar que a condição de teste eventualmente é falsa (faz com que o ciclo pare).
+
+		5) Se o ciclo iteragir um máximo de N vezes, mostrar que I(N) implicar a pós-condição.	

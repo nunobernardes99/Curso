@@ -1,0 +1,23 @@
+fn main() {
+    read_line(& a);
+    let a = k + 2;
+    a = a + 2;
+    if 2 > 5 { 
+        if x > 10 {
+            print!("2 + 5");
+        }
+        let c = 2 + 7;
+    } else {
+        let k = 20 + 5;
+    }
+    while 20 - 14 > 5 { 
+        let s = 10/5;
+        while i < 25 {
+            if 2 == 7 {
+                let x = 10;
+            } else {
+                let p = 20;
+            }
+        }
+    }
+}

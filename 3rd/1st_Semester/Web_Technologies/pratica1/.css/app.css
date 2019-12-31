@@ -1,0 +1,49 @@
+body {
+    background-color: rgb(221, 27, 92);
+    font-family: 'Big Shoulders Text', cursive;
+}
+
+h1 {
+    color: rgb(243, 162, 162);
+    letter-spacing: 2px;
+    border-bottom: 3px solid brown;
+    font-size: 40px;
+}
+
+p {
+    padding-top: 5px;
+    letter-spacing: 2px;
+    color: rgb(241, 190, 190); 
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+li {
+    text-align: center;
+    letter-spacing: 2px;
+    color: rgb(92, 65, 65);
+    float: left;
+    padding: 10px;
+    border: 2px solid brown;
+    margin-right: 5px;
+    background-color: rgb(243, 162, 162);
+}
+
+.active {
+    color: white;
+    background-color: rgb(122, 40, 40); 
+}
+
+.building {
+    padding: 20px;
+}
+
+.logoFC {
+    padding: 20px;
+    width: 60%;
+}

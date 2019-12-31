@@ -1,0 +1,8 @@
+Invariante do ciclo:
+1) Escrever intuição sobre o que o código faz;
+2) A invariante é incremental, nunca dizer o que é verdade nem quando o ciclo acaba, mas sim dizer algo que seja verdade todas as vezes que o ciclo executa, em todas as iterações;
+3) Usar "partes das listas que já foram processadas" exemplo:
+		-> a[k], a[k+1], ... , a[n-1], a[n];
+4) Os invariantes não podem ter conceito de tempo. Não podem dizer o que acontece no código, não podem dizer nada sobre o que o código fará após nem antes do ciclo executar;
+5) Invariantes são verdade até quando a condição de ciclo é falsa (ciclo acaba);
+6) Nas provas de correção, usar apenas invariantes, condições de ciclo, pré condições e matemáticas. Tudo o resto que venha da intuição deve fazer parte da invariante.

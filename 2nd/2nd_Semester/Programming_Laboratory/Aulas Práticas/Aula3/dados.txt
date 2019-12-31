@@ -1,0 +1,37 @@
+7
+Programacao Imperativa
+1
+Calculo Infinitesimal I
+1
+Programacao Estruturada
+1
+Bases de Dados
+3
+Complexidade
+4
+Probabilidades e Estatistica 
+2
+Modelos de Computacao
+2
+
+10
+Joao Diogo Silva
+2001018001 1 2
+Mariana Pinto Matias
+2001018003 4 1 4 2 3 
+Anabela Moreira
+2004018014 3 1 3 2
+Gabriel Eduardo Pereira
+2000007315 3 5 6 7
+Sonia Silva
+1999018015 1 7
+Manuel Pereira
+2001019005 3 3 2 6
+Carlos Santos
+2004019007 3 1 2 3 
+Lurdes Silva
+2003018007 5 1 6 3 7 4
+Pedro Jorge Santos Queiroz
+2000007215 1 5
+Antonieta Ferreira de Marques 
+2003018077 3 1 7 4

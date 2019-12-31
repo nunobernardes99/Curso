@@ -1,0 +1,1 @@
+Esta pasta contem todos os ficheiros de Administracao de Sistemas

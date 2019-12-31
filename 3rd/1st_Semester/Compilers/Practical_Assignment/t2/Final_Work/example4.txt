@@ -1,0 +1,13 @@
+fn main() {
+    let a = 10 + 5 * 3 / 24;
+    a = 10 * 8 - 24 + 123;
+    if a < 1234 {
+        a = 1;
+        let b = 10;
+    } else {
+        a = 2;
+        let c = 20;
+    }
+    let result = a + b + c;
+    print!("result");
+}

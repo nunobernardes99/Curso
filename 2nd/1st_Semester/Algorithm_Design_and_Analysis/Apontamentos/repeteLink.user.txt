@@ -1,0 +1,1328 @@
+// ==UserScript==
+// @name           RepeteLink
+// @version        1.0
+// @namespace      none
+// @description    Repete links
+// @require        http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js
+
+// @include        http://f*.fairtrav.*/report*
+// @include        http://f*.fairtrav.*/profile.php*
+// @include        http://f*.fairtrav.*/build.php?id=*
+// @include        http://f*.fairtrav.*/statistics.php*
+// @include        http://s2.senwar.hu/report*
+// @include        http://s2.senwar.hu/profile.php*
+// @include        http://s2.senwar.hu/build.php?id=*
+// @include        http://s2.senwar.hu/statistics.php*
+// @include        http://s2.highspeedtrav.org/report*
+// @include        http://s2.highspeedtrav.org/profile.php*
+// @include        http://s2.highspeedtrav.org/build.php?id=*
+// @include        http://s2.highspeedtrav.org/statistics.php*	
+// @include        *gotravspeed.com/report*
+// @include        *gotravspeed.com/profile.php*
+// @include        *gotravspeed.com/build.php?id=*
+// @include        *gotravspeed.com/statistics.php*
+// @include        https://www.ztravian.com/s1/report*
+// @include        https://www.ztravian.com/s1/profile.php*
+// @include        https://www.ztravian.com/s1/build.php?id=*
+// @include        https://www.ztravian.com/s1/statistics.php*
+// @include        http://www.travianacid.com/report*
+// @include        http://www.travianacid.com/profile.php*
+// @include        http://www.travianacid.com/build.php?id=*
+// @include        http://www.travianacid.com/statistics.php*
+// @include        http://ss-travi.com*/report*
+// @include        http://ss-travi.com*/profile.php*
+// @include        http://ss-travi.com*/build.php?id=*
+// @include        http://ss-travi.com*/statistics.php*
+// @grant          GM_xmlhttpRequest
+// ==/UserScript==
+
+$(function(){	
+	if (window.location.href.match(/\/report\.php.*/)){
+		//setLocal('farmList', [{"id":"4042","x":"10","y":"21"},{"id":"152769","x":"-22","y":"8"},{"id":"7637","x":"18","y":"-2"},{"id":"13","x":"0","y":"12"},{"id":"152358","x":"-24","y":"-1"},{"id":"2414","x":"6","y":"1"},{"id":"1207","x":"3","y":"0"},{"id":"159571","x":"-6","y":"-24"},{"id":"160005","x":"-4","y":"8"},{"id":"3604","x":"8","y":"-15"},{"id":"86227","x":"-188","y":"198"},{"id":"155580","x":"-15","y":"5"},{"id":"159570","x":"-6","y":"-25"},{"id":"6848","x":"17","y":"13"},{"id":"159205","x":"-6","y":"12"},{"id":"156787","x":"-12","y":"6"},{"id":"2802","x":"6","y":"-13"},{"id":"154362","x":"-19","y":"-7"},{"id":"154769","x":"-18","y":"-2"},{"id":"158375","x":"-9","y":"-14"},{"id":"2807","x":"6","y":"-8"},{"id":"156378","x":"-14","y":"-1"},{"id":"154380","x":"-18","y":"11"},{"id":"419","x":"1","y":"16"},{"id":"60856","x":"151","y":"153"},{"id":"158376","x":"-9","y":"-13"},{"id":"7251","x":"18","y":"14"},{"id":"6030","x":"14","y":"-1"},{"id":"159180","x":"-7","y":"-13"},{"id":"159975","x":"-5","y":"-22"},{"id":"160372","x":"-4","y":"-27"},{"id":"154767","x":"-18","y":"-4"},{"id":"2382","x":"5","y":"-31"},{"id":"3997","x":"9","y":"-24"},{"id":"153561","x":"-21","y":"-4"},{"id":"153934","x":"-20","y":"-33"},{"id":"159621","x":"-5","y":"26"},{"id":"405","x":"1","y":"2"},{"id":"153967","x":"-19","y":"0"},{"id":"9655","x":"24","y":"6"},{"id":"160416","x":"-3","y":"17"},{"id":"826","x":"2","y":"21"},{"id":"7240","x":"18","y":"3"},{"id":"6046","x":"15","y":"15"},{"id":"155173","x":"-16","y":"0"},{"id":"5638","x":"14","y":"9"},{"id":"158774","x":"-8","y":"-17"},{"id":"7635","x":"18","y":"-4"},{"id":"4040","x":"10","y":"19"},{"id":"5216","x":"12","y":"-11"},{"id":"2823","x":"7","y":"8"},{"id":"5646","x":"14","y":"17"},{"id":"2385","x":"5","y":"-28"},{"id":"4027","x":"10","y":"6"},{"id":"153573","x":"-20","y":"8"},{"id":"1204","x":"2","y":"-3"},{"id":"157972","x":"-10","y":"-15"},{"id":"154381","x":"-18","y":"12"},{"id":"155165","x":"-17","y":"-8"},{"id":"82609","x":"-197","y":"198"},{"id":"10376","x":"25","y":"-77"},{"id":"4813","x":"11","y":"-12"},{"id":"9215","x":"22","y":"-32"},{"id":"64162","x":"159","y":"-159"},{"id":"155178","x":"-16","y":"5"},{"id":"6034","x":"15","y":"3"},{"id":"6841","x":"17","y":"6"},{"id":"426","x":"1","y":"23"},{"id":"806","x":"2","y":"1"},{"id":"153987","x":"-19","y":"20"},{"id":"6837","x":"17","y":"2"},{"id":"155996","x":"-14","y":"19"},{"id":"158798","x":"-7","y":"7"},{"id":"5243","x":"13","y":"16"},{"id":"158799","x":"-7","y":"8"},{"id":"160428","x":"-3","y":"29"},{"id":"158396","x":"-8","y":"7"},{"id":"156366","x":"-14","y":"-13"},{"id":"2014","x":"5","y":"3"},{"id":"155963","x":"-15","y":"-14"},{"id":"160420","x":"-3","y":"21"},{"id":"155560","x":"-16","y":"-15"},{"id":"2029","x":"5","y":"18"},{"id":"2000","x":"4","y":"-11"},{"id":"31250","x":"77","y":"-107"},{"id":"161190","x":"-2","y":"-13"},{"id":"158792","x":"-7","y":"1"},{"id":"4821","x":"11","y":"-4"},{"id":"152760","x":"-23","y":"-1"},{"id":"158801","x":"-7","y":"10"},{"id":"157202","x":"-11","y":"19"},{"id":"158402","x":"-8","y":"13"},{"id":"1598","x":"3","y":"-11"},{"id":"8446","x":"21","y":"3"},{"id":"22","x":"0","y":"21"},{"id":"425","x":"1","y":"22"},{"id":"155589","x":"-15","y":"14"},{"id":"12464","x":"31","y":"1"},{"id":"7640","x":"19","y":"1"},{"id":"155590","x":"-15","y":"15"},{"id":"4007","x":"9","y":"-14"},{"id":"4006","x":"9","y":"-15"},{"id":"3617","x":"8","y":"-2"},{"id":"822","x":"2","y":"17"},{"id":"153576","x":"-20","y":"11"},{"id":"1225","x":"3","y":"18"},{"id":"1990","x":"4","y":"-21"},{"id":"160384","x":"-4","y":"-15"},{"id":"161191","x":"-2","y":"-12"},{"id":"153957","x":"-20","y":"-10"},{"id":"3230","x":"8","y":"13"},{"id":"159216","x":"-6","y":"23"},{"id":"8031","x":"19","y":"-10"},{"id":"3608","x":"8","y":"-11"},{"id":"38107","x":"94","y":"-84"},{"id":"37705","x":"93","y":"-84"},{"id":"157598","x":"-10","y":"13"},{"id":"157597","x":"-10","y":"12"},{"id":"150014","x":"-29","y":"67"},{"id":"158812","x":"-7","y":"21"},{"id":"158399","x":"-8","y":"10"},{"id":"4836","x":"12","y":"11"},{"id":"157569","x":"-11","y":"-16"},{"id":"157570","x":"-11","y":"-15"}]);
+		
+		$('input#btn_delete').parent().append('<input id="scriptSelectAll" type="button" value="Selecionar todos" />');
+	
+		$('input#scriptSelectAll').click(function(){
+			var inputSelect;
+			$('table#overview > tbody > tr').each(function(index, element){
+				inputSelect = $(element).find('td.sel input');
+	
+				if ($(inputSelect).attr('checked')){
+					$(inputSelect).attr('checked', false);
+				}else{
+					$(inputSelect).attr('checked', true);
+				}
+			});
+		});
+		
+		var carry = $('table#report_surround table#attacker tbody.goods div.carry');
+		
+		if (carry.length > 0){			
+			var match = carry.text().match(/([0-9]+)\/([0-9]+)/);
+			if (match){
+				carry.after(Math.round((match[1]/match[2])*100) + '% -->');
+			}
+			
+		}
+	}
+	
+	if (window.location.href.match(/profile\.php.*/)){
+		$('table#villages:first').before('<input type="button" id="addAllVillages" value="ADD"/>');
+		$('div#content input#addAllVillages').click(function(){
+			$('table#villages td.aligned_coords')
+				.each(function(index, element){
+					var match = $(element).text().match(/\((-?[0-9]+)\|(-?[0-9]+)\)/);
+					if (!inFarmList(match[1], match[2])){
+						var id = $(element).parent().find('td.nam a').attr('href').match(/village3\.php\?id=([0-9]+)/);
+						addFarm(id[1], match[1], match[2]);
+						
+						if (inFarmList(match[1], match[2])){
+							$(this).css('background-color', 'red');
+							
+						} else {
+							$(this).css('background-color', 'white');
+						}
+					}
+				})
+			;
+		});
+		
+		$('table#villages td.aligned_coords')
+			.click(function(){
+				var match = $(this).text().match(/\((-?[0-9]+)\|(-?[0-9]+)\)/);
+				var id = $(this).parent().find('td.nam a').attr('href').match(/village3\.php\?id=([0-9]+)/);
+				addFarm(id[1], match[1], match[2]);
+				
+				if (inFarmList(match[1], match[2])){
+					$(this).css('background-color', 'red');
+					
+				} else {
+					$(this).css('background-color', 'white');
+				}
+			})
+			.each(function(index, element){
+				var match = $(element).text().match(/\((-?[0-9]+)\|(-?[0-9]+)\)/);
+				if (inFarmList(match[1], match[2])){
+					$(this).css('background-color', 'red');
+				}
+			})
+		;
+		
+		var farmSettings = getLocal('farmSettings');
+		
+		if (!farmSettings){
+			farmSettings = {
+				'interval': 2000,
+				'number': 100000,
+			};
+			
+			setLocal('farmSettings', farmSettings);
+		}
+
+		var troopCounter = getLocal('troopCounter');
+		
+		if (!troopCounter){
+			troopCounter = {
+				'amount': 0,
+				'time': new Date,
+			};
+			
+			setLocal('troopCounter', troopCounter);
+		}
+		log(troopCounter.amount);
+		
+		var tribeSettings = getLocal('tribeSettings');
+		if (!tribeSettings){
+			tribeSettings = {
+				'tribe': '1',
+				'build': '1',
+				'farm': '1'
+			};
+			
+			setLocal('tribeSettings', tribeSettings);
+		}
+		log(tribeSettings);
+		
+		$('div#mid').append('<div id="mainOgum"></div>');
+		$('div#mainOgum')
+			.css('width', '260px')
+			.css('background-color', 'white')
+			.css('position', 'fixed')
+			.css('left', '0px')
+			.css('top', '0px')
+			.css('z-index', '99')
+			.css('text-align', 'center')
+			
+			.append(
+				'<fieldset id="chooseTribe">'+ 
+					'<legend>Tribo</legend>'+ 
+					'<div class="center">'+ 
+						'<span class="tribeBox" alt="Romano" title="Romano">'+ 
+							'<div>'+ 
+								'<img src="assets/t4/img/tribe/romans-rtl.jpg" />'+ 
+							'</div>'+ 
+							'<input class="radio" type="radio" name="tribe" value="1" '+ ((tribeSettings.tribe == 1) ? 'checked="checked"':'') +'/>'+ 
+						'</span>'+ 
+						'<span class="tribeBox" alt="Teutão" title="Teutão">'+ 
+							'<div>'+ 
+								'<img src="assets/t4/img/tribe/teutons-rtl.jpg" />'+ 
+							'</div>'+ 
+							'<input class="radio" type="radio" name="tribe" value="2" '+ ((tribeSettings.tribe == 2) ? 'checked="checked"':'') +'/>'+ 
+						'</span>'+ 
+						'<span class="tribeBox" alt="Gaulês" title="Gaulês">'+ 
+							'<div>'+ 
+								'<img src="assets/t4/img/tribe/gauls-rtl.jpg" />'+ 
+							'</div>'+ 
+							'<input class="radio" type="radio" name="tribe" value="3" '+ ((tribeSettings.tribe == 3) ? 'checked="checked"':'') +'/>'+ 
+						'</span>'+ 
+						'<span class="tribeBox" alt="DBoor" title="DBoor">'+ 
+							'<div>'+ 
+								'<img src="assets/t4/img/tribe/moghol.png" />'+ 
+							'</div>'+ 
+							'<input class="radio" type="radio" name="tribe" value="4" '+ ((tribeSettings.tribe == 4) ? 'checked="checked"':'') +'/>'+ 
+						'</span>'+ 
+						'<span class="tribeBox" alt="Persa" title="Persa">'+ 
+							'<div>'+ 
+								'<img src="assets/t4/img/tribe/pars.png" />'+ 
+							'</div>'+ 
+							'<input class="radio" type="radio" name="tribe" value="5" '+ ((tribeSettings.tribe == 5) ? 'checked="checked"':'') +'/>'+ 
+						'</span>'+ 
+					'</div>'+ 
+				'</fieldset>'
+			)
+			.append(
+				'<fieldset id="buildTroop">'+ 
+					'<legend>Tropas</legend>'+ 
+					'<div class="troopType">'+ 
+						getTroopTypes(tribeSettings.tribe, 'build') +
+					'</div>'+ 
+					'<hr />'+ 
+					'<input class="checkbox" type="checkbox" />'+ 
+					'<div id="troopCounter">'+ 
+						getTroopCounterString(troopCounter) +
+					'</div>'+ 
+					'<input id="resetCounter" type="button" value="Zerar" />'+ 
+				'</fieldset>'
+			)
+			.append(
+				'<fieldset id="sendFarm">'+
+					'<legend>Farm</legend>'+
+					'<div class="troopType">'+ 
+						getTroopTypes(tribeSettings.tribe, 'farm') +
+					'</div>'+ 
+					'<hr />'+ 
+					'<label for="sendFarmCheck">'+
+						'<img src="assets/default/img/a/att2.gif" >'+
+					'</label>'+
+					'<input id="sendFarmCheck" type="checkbox" /><br />'+
+					
+					'<div class="row">'+
+						'<label for="sendFarmNumber" >'+
+							'Tropa por ataque'+
+						'</label>'+
+						'<input id="sendFarmNumber" value="'+ farmSettings.number +'" />'+
+					'</div>'+
+					'<div class="row">'+
+						'<label for="sendFarmInterval" >'+
+							'Intervalo(ms)'+
+						'</label>'+
+						'<input id="sendFarmInterval" value="'+ farmSettings.interval +'" />'+
+					'</div>'+
+					
+					'<input id="farmSettings" type="button" value="OK" /><hr />'+
+					'<span>'+ getLocal('farmList').length + ' aldeias na lista</span><hr />'+
+					'<label for="getFarmList">Lista</label><textarea id="getFarmList">'+ localStorage.getItem('farmList_repeteLink') +'</textarea>'+
+					'<br />'+
+					'<input type="button" id="saveFarmList" value="Salva lista" />'+
+				'</fieldset>'
+			)
+			.append('<fieldset id="buildResources"><legend>Campos de recurso</legend><input type="button" value="R" /><span></span></fieldset>')
+			.append('<fieldset id="receiveCaptcha"><legend>Captcha</legend></fieldset>')
+		;
+		
+		setTroopCss('build');
+		setTroopCss('farm');
+		
+		$('fieldset#chooseTribe span.tribeBox img')
+			.css('width', '40px')
+			.css('height', '40px')
+		;
+		
+		$('fieldset#chooseTribe > div.center')
+			.css('width', '225px')
+			.css('height', '40px')
+		;
+		
+		$('fieldset#chooseTribe span.tribeBox')
+			.css('float', 'left')
+			.css('margin-right', '4px')
+		;
+		
+		$('fieldset#chooseTribe span.tribeBox input.radio').click(function(){
+			var tribeSettings = getLocal('tribeSettings');
+			tribeSettings.tribe = $(this).val();
+			
+			setLocal('tribeSettings', tribeSettings);
+			
+			$('div#mainOgum fieldset#buildTroop div.troopType').html(getTroopTypes(tribeSettings.tribe, 'build'));
+			$('div#mainOgum fieldset#sendFarm div.troopType').html(getTroopTypes(tribeSettings.tribe, 'farm'));
+			setTroopCss('build');
+			setTroopCss('farm');
+		});
+		
+		$('fieldset#sendFarm label')
+			.css('display', 'inline-block')
+			.css('width', '130px')
+		;
+		
+		$('fieldset#sendFarm div.row input')
+			.css('margin-right', '0px')
+			.css('width', '75px')
+		;
+		
+		$('div#mainOgum .center')
+			.css('margin-right', 'auto')
+			.css('margin-left', 'auto')
+		;
+		
+		var troopCheck = $('fieldset#buildTroop input.checkbox');
+		var farmCheck = $('fieldset#sendFarm input#sendFarmCheck');
+		var resourcesButton = $('fieldset#buildResources > input');
+		
+		if (getSession('buildTroops')){
+			troopCheck.attr('checked', true);
+		}
+		if (getSession('sendFarm')){
+			farmCheck.attr('checked', true);
+		}
+		
+		troopCheck.click(function(){
+			if (troopCheck.is(':checked')){
+				setSession('buildTroops', true);
+			} else {
+				setSession('buildTroops', false);
+			}
+		});
+		
+		farmCheck.click(function(){
+			if (farmCheck.is(':checked')){
+				setSession('sendFarm', true);
+			} else {
+				setSession('sendFarm', false);
+			}
+		});
+		
+		$('input#resetCounter').click(function(){
+			var troopCounter = {
+				'amount': 0,
+				'time': new Date,
+			};
+			
+			setLocal('troopCounter', troopCounter);
+		});
+		
+		resourcesButton.click(function(){
+			buildResources();
+		});
+		
+		var troopTimeout = setInterval(buildTroops, 3000);
+		var farmTimeout = setInterval(sendFarm, farmSettings.interval);
+
+		$('fieldset#sendFarm input#farmSettings').click(function(){
+			log('clear');
+			clearInterval(farmTimeout);
+			
+			farmSettings.number = parseInt($('fieldset#sendFarm input#sendFarmNumber').val(), 10);
+			farmSettings.interval = parseInt($('fieldset#sendFarm input#sendFarmInterval').val(), 10);
+			
+			setLocal('farmSettings', farmSettings);
+			log(farmSettings);
+			
+			farmTimeout = setInterval(sendFarm, farmSettings.interval);
+		});
+		
+		$('input#saveFarmList').click(function(){
+			log(JSON.parse($('textarea#getFarmList').val()));
+			setLocal('farmList', JSON.parse($('textarea#getFarmList').val()));
+		});
+	}
+	
+	if (window.location.href.match(/build\.php\?id=(2[12])|34/)){ //armory ou blacksmith
+		var loc = $('table.build_details td.act a').first().attr('href');
+		log('up');
+		
+		if (loc){
+			window.location.href = $('table.build_details td.act a').first().attr('href');
+		}
+	}
+	
+	if (window.location.href.match(/build\.php\?id=[0-9]+/)){
+		log('BUILD');
+		var a = $('p#contract a.build');
+		a.after('<div id="startBuilding"><input type="button" value="Start" /><span></span></div>');
+		$('div#startBuilding > input').click(function(){
+			startBuilding(a.attr('href'));
+		});
+	}
+	
+	if (window.location.href.match(/statistics\.php/)){
+		log('SPIES');
+		
+		$('table#player').before('<input id="sendSpies" type="button" value="Spy" />');
+		
+		$('table#player thead td:eq(0)').prepend('<input id="invertSpy" type="button" value="I" >');
+		
+		$('table#player tbody tr')
+			.each(function(index, element){
+				var boxVal = $(this).find('td.pla a').attr('href')
+				
+				 $(this).find('td.ra').prepend('<input class="sendSpy" value="'+ boxVal +'" type="checkbox" checked="checked" >');
+			})
+		;
+
+		$('input#invertSpy').click(function(){
+			$('table#player tbody tr td.ra input.sendSpy').each(function(index, element){
+				if ($(element).attr('checked')){
+					$(element).attr('checked', false);
+				}else{
+					$(element).attr('checked', true);
+				}
+			});
+		});
+		
+		$('input#sendSpies').click(function(){
+			var profiles = new Array;
+	
+			$('table#player tbody tr td.ra input.sendSpy:checked').each(function(index, element){
+				log($(this).val());
+				profiles.push($(this).val());
+			});
+			
+			sendSpies(profiles);
+		});
+		
+	}
+});
+
+function getTroopCounterString(troopCounter){
+	return addPoints(troopCounter.amount) +' tropas em '+ parseInt(((new Date).getTime() - (new Date(troopCounter.time)).getTime())/60000, 10) +' minutos<br />'+ 
+		   addPoints((parseInt(troopCounter.amount/(((new Date).getTime() - (new Date(troopCounter.time)).getTime())/60000), 10)) || 0) + ' por minuto';
+}
+
+function updateTroopCounter(){
+	var troopCounter = getLocal('troopCounter');
+		
+	if (!troopCounter){
+		troopCounter = {
+			'amount': 0,
+			'time': new Date,
+		};
+		
+		setLocal('troopCounter', troopCounter);
+	}
+	
+	$('div#mainOgum div#troopCounter').html(getTroopCounterString(troopCounter));
+}
+
+function setTroopCss(option){
+	if (option == 'build'){
+		var fieldsetId = 'buildTroop';
+	} else {
+		var fieldsetId = 'sendFarm';
+	}
+	
+	$('fieldset#'+ fieldsetId +' div.troopType')
+		.css('width', '225x')
+		.css('height', '33px')
+	;
+	
+	$('fieldset#'+ fieldsetId +' div.troopType span')
+		.css('display', 'inline-block')
+		.css('margin-right', '4px')
+	;
+	
+	$('fieldset#'+ fieldsetId +' div.troopType span input.radio').click(function(){
+		var tribeSettings = getLocal('tribeSettings');
+		tribeSettings[option] = $(this).val();
+		
+		setLocal('tribeSettings', tribeSettings);
+	});
+		
+}
+
+function getTroopTypes(tribe, option){
+	var tribeSettings = getLocal('tribeSettings');
+	if (!tribeSettings){
+		tribeSettings = {
+			'tribe': '1',
+			'build': '1',
+			'farm': '1'
+		};
+		
+		setLocal('tribeSettings', tribeSettings);
+	}
+	
+	var tribesNames = {
+		1:['Legionário', 'Pretoriano', 'Imperiano', 'Equites Legati', 'Equites Imperatoris', 'Equites Caesaris', 'Ram', 'Catapulta de fogo'],
+		2:['Salteador', 'Lanceiro', 'Bárbaro', 'Espião', 'Paladino', 'Cavaleiro Teutão', 'Ram', 'Catapulta'],
+		3:['Falange', 'Espadachim', 'Batedor', 'Trovão Theutate', 'Cavaleiro Druida', 'Haeduano', 'Ram', 'Trebuchet'],
+		4:['Ninja', 'Swordsman', 'Fierce Striker', 'Charming', 'Knight Noose', 'Fares Arrows', 'Ram', 'Cannon Fire'],
+		5:['Archer', 'Thorn Warrior', 'Guard', 'Bird Spy', 'Fares Persians', 'Fares Axes', 'Ram', 'Catapulta de fogo']
+	};
+	
+	var ret = '';
+	for (var i=0; i<8; i++){
+		if (i == 6)
+			continue;
+			
+		ret +=
+		'<span alt="'+ tribesNames[tribe][i] +'" title="'+ tribesNames[tribe][i] +'">'+ 
+			'<div>'+ 
+				getIcon(tribe, i+1)+ 
+			'</div>'+ 
+			'<input class="radio" type="radio" name="'+ option +'Type" value="'+ (i+1) +'" '+ ((tribeSettings[option] == i+1) ? 'checked="checked"':'') +'/>'+ 
+		'</span>';
+	}
+	
+	return ret;
+}
+
+function getIcon(tribe, troop){
+	switch(parseInt(tribe, 10)){
+		case 1:
+			tribeImage = 'v1_romans2.gif';
+			break;
+		case 2:
+			tribeImage = 'v2_teutons2.gif';
+			break;
+		case 3:
+			tribeImage = 'v3_gauls2.gif';
+			break;
+		case 4:
+			tribeImage = 'v6_monsters2.gif';
+			break;
+		case 5:
+			tribeImage = 'v7_arab.gif';
+	}
+	
+	var pos=(troop-1) * (-19);		
+	return '<img src="assets/x.gif" style="width:16px; height:16px; background-image:url(\'assets/default/img/u/'+ tribeImage + '\'); background-position:' + pos + 'px 0;">';
+}
+
+function addPoints(number){
+	if ((typeof number) == 'number'){
+		number = number.toString();
+	}
+	
+	var slicePoint = number.length - 3;
+	var casas = new Array;
+	
+	while (slicePoint >= 0){
+		casas.unshift(number.slice(slicePoint,slicePoint+3));
+		slicePoint -= 3;
+	}
+	
+	if (number.length % 3){
+		casas.unshift(number.slice(0, number.length % 3));
+	}
+	
+	return casas.join('.');
+}
+
+function startBuilding(aHref){
+	log(aHref);
+	GM_xmlhttpRequest({
+		method: "GET",
+		url: aHref,
+		onload: function(response) {
+			var id = aHref.match(/village2\.php\?id=([0-9]+)/)[1];
+			
+			GM_xmlhttpRequest({
+				method: "GET",
+				url: "build.php?id="+ id,
+				onload: function(response) {
+					$('div#startBuilding > span').html($(response.responseText).find('p#contract a.build').html());
+					startBuilding($(response.responseText).find('p#contract a.build').attr('href'));
+				}
+			});
+		}
+	});
+}
+
+function buildResources(){
+	GM_xmlhttpRequest({
+		method: "GET",
+		url: "village1.php",
+		onload: function(response) {
+			if (($(response.responseText).find('form input[type="password"]').length)){
+				login(buildResources);
+			} else {
+				var lowest = 0;
+				var lowestId;
+				
+				var timer1 = stringToMili($(response.responseText).find('table#building_contract tbody tr td span#timer1').first().html());
+				
+				if (timer1){
+					log('Espera '+ timer1);
+					setTimeout(buildResources, timer1);
+					return false;
+				}
+				
+				$(response.responseText).find('map#rx area').each(function (index, element){
+					if (index < 18){
+						var match = $(element).attr('title').match(/([0-9]+)$/);
+						if ((parseInt(match[1], 10) < lowest) || (!lowestId)){
+							lowest = parseInt(match[1], 10);
+							lowestId = index+1;
+						}
+					}
+				});
+				
+				GM_xmlhttpRequest({
+					method: "GET",
+					url: "build.php?id="+lowestId,
+					onload: function(response) {
+						if (($(response.responseText).find('form input[type="password"]').length)){
+							login(buildResources);
+						} else {
+							var loc = $(response.responseText).find('p#contract a.build').attr('href');
+							
+							if (loc){
+								GM_xmlhttpRequest({
+									method: "GET",
+									url: loc,
+									onload: function(response) {
+										$('fieldset#buildResources > span').html(lowestId +' => '+ (lowest+1));
+										buildResources();
+									}
+								});
+							} else {
+								$('fieldset#buildResources > span').html('FIM');
+							}
+						}
+					}
+				});
+			}
+		}
+	});
+}
+
+function stringToMili(str){
+	if (str != null){
+		var hourArray = str.split(':');
+		
+		return hourArray[0]*3600000 + hourArray[1]*60000 + hourArray[2]*1000;
+	} else {
+		return null;
+	}
+}
+
+function log(element){
+	return unsafeWindow.console.log(element);
+}
+
+function getSession(name){
+	return JSON.parse(sessionStorage.getItem(name +'_repeteLink'));
+}
+
+function setSession(name, value){
+	sessionStorage.setItem(name +'_repeteLink', JSON.stringify(value));
+}
+
+function getLocal(name){
+	return JSON.parse(localStorage.getItem(name +'_repeteLink'));
+}
+
+function setLocal(name, value){
+	localStorage.setItem(name +'_repeteLink', JSON.stringify(value));
+}
+
+
+function sendFarm(){
+	if (!(getSession('sendFarm'))){
+		return false;
+	}
+	
+	var tribeSettings = getLocal('tribeSettings');
+	var farmSettings = getLocal('farmSettings');	
+	var farmList = getLocal('farmList');
+	var item = farmList.shift();
+	var data;
+	
+	log('('+ item.x + '|'+ item.y +')');
+	
+	farmList.push(item);
+	setLocal('farmList', farmList);
+	log(tribeSettings);
+	
+	if (tribeSettings.tribe == 1){
+		switch(tribeSettings.farm){
+			case '1':
+				data = "id="+ item.id +"&c=4&t%5B1%5D="+ farmSettings.number +"&t%5B2%5D=0&t%5B3%5D=0&t%5B4%5D=0&t%5B5%5D=0&t%5B6%5D=0&t%5B7%5D=0&t%5B8%5D=0&t%5B9%5D=0&t%5B10%5D=0&s1.x="+ item.x +"&s1.y="+ item.y +"&s1=ok";
+				break;
+			case '2':
+				data = "id="+ item.id +"&c=4&t%5B1%5D=0&t%5B2%5D="+ farmSettings.number +"&t%5B3%5D=0&t%5B4%5D=0&t%5B5%5D=0&t%5B6%5D=0&t%5B7%5D=0&t%5B8%5D=0&t%5B9%5D=0&t%5B10%5D=0&s1.x="+ item.x +"&s1.y="+ item.y +"&s1=ok";
+				break;
+			case '3':
+				data = "id="+ item.id +"&c=4&t%5B1%5D=0&t%5B2%5D=0&t%5B3%5D="+ farmSettings.number +"&t%5B4%5D=0&t%5B5%5D=0&t%5B6%5D=0&t%5B7%5D=0&t%5B8%5D=0&t%5B9%5D=0&t%5B10%5D=0&s1.x="+ item.x +"&s1.y="+ item.y +"&s1=ok";
+				break;
+			case '4':
+				alert('Indisponível');
+				return false;
+			case '5':
+				data = "id="+ item.id +"&c=4&t%5B1%5D=0&t%5B2%5D=0&t%5B3%5D=0&t%5B4%5D=0&t%5B5%5D="+ farmSettings.number +"&t%5B6%5D=0&t%5B7%5D=0&t%5B8%5D=0&t%5B9%5D=0&t%5B10%5D=0&s1.x="+ item.x +"&s1.y="+ item.y +"&s1=ok";
+				break;
+			
+			case '6':
+				data = "id="+ item.id +"&c=4&t%5B1%5D=0&t%5B2%5D=0&t%5B3%5D=0&t%5B4%5D=0&t%5B5%5D=0&t%5B6%5D="+ farmSettings.number +"&t%5B7%5D=0&t%5B8%5D=0&t%5B9%5D=0&t%5B10%5D=0&s1.x="+ item.x +"&s1.y="+ item.y +"&s1=ok";
+				break;
+			
+		}
+		
+	} else if (tribeSettings.tribe == 2){
+		switch(tribeSettings.farm){
+			case '1':
+				data = "id="+ item.id +"&c=4&t%5B11%5D="+ farmSettings.number +"&t%5B12%5D=0&t%5B13%5D=0&t%5B14%5D=0&t%5B15%5D=0&t%5B16%5D=0&t%5B17%5D=0&t%5B18%5D=0&t%5B19%5D=0&t%5B20%5D=0&s1.x="+ item.x +"&s1.y="+ item.y +"&s1=ok";
+				break;
+			case '2':
+				data = "id="+ item.id +"&c=4&t%5B11%5D=0&t%5B12%5D="+ farmSettings.number +"&t%5B13%5D=0&t%5B14%5D=0&t%5B15%5D=0&t%5B16%5D=0&t%5B17%5D=0&t%5B18%5D=0&t%5B19%5D=0&t%5B20%5D=0&s1.x="+ item.x +"&s1.y="+ item.y +"&s1=ok";
+				break;
+			case '3':
+				data = "id="+ item.id +"&c=4&t%5B11%5D=0&t%5B12%5D=0&t%5B13%5D="+ farmSettings.number +"&t%5B14%5D=0&t%5B15%5D=0&t%5B16%5D=0&t%5B17%5D=0&t%5B18%5D=0&t%5B19%5D=0&t%5B20%5D=0&s1.x="+ item.x +"&s1.y="+ item.y +"&s1=ok";
+				break;
+			case '4':
+				data = "id="+ item.id +"&c=4&t%5B11%5D=0&t%5B12%5D=0&t%5B13%5D=0&t%5B14%5D="+ farmSettings.number +"&t%5B15%5D=0&t%5B16%5D=0&t%5B17%5D=0&t%5B18%5D=0&t%5B19%5D=0&t%5B20%5D=0&s1.x="+ item.x +"&s1.y="+ item.y +"&s1=ok";
+				break;
+			case '5':
+				data = "id="+ item.id +"&c=4&t%5B11%5D=0&t%5B12%5D=0&t%5B13%5D=0&t%5B14%5D=&t%5B15%5D="+ farmSettings.number +"&t%5B16%5D=0&t%5B17%5D=0&t%5B18%5D=0&t%5B19%5D=0&t%5B20%5D=0&s1.x="+ item.x +"&s1.y="+ item.y +"&s1=ok";
+				break;
+			case '6':
+				data = "id="+ item.id +"&c=4&t%5B11%5D=0&t%5B12%5D=0&t%5B13%5D=0&t%5B14%5D=&t%5B15%5D=0&t%5B16%5D="+ farmSettings.number +"&t%5B17%5D=0&t%5B18%5D=0&t%5B19%5D=0&t%5B20%5D=0&s1.x="+ item.x +"&s1.y="+ item.y +"&s1=ok";
+				break;
+			case '8':
+				data = "dtg=10&dtg1=10&id="+ item.id +"&c=3&t%5B11%5D=0&t%5B12%5D=0&t%5B13%5D=0&t%5B14%5D=0&t%5B15%5D=0&t%5B16%5D=0&t%5B17%5D=0&t%5B18%5D="+ farmSettings.number +"&t%5B19%5D=0&t%5B20%5D=0";
+				break;
+		}
+	} else if (tribeSettings.tribe == 3){
+		switch(tribeSettings.farm){
+			case '1':
+				data = "id="+ item.id +"&c=4&t%5B21%5D="+ farmSettings.number +"&t%5B22%5D=0&t%5B23%5D=0&t%5B24%5D=0&t%5B25%5D=0&t%5B26%5D=0&t%5B27%5D=0&t%5B28%5D=0&t%5B29%5D=0&t%5B30%5D=0&s1.x="+ item.x +"&s1.y="+ item.y +"&s1=ok";
+				break;
+			case '2':
+				data = "id="+ item.id +"&c=4&t%5B21%5D=0&t%5B22%5D="+ farmSettings.number +"&t%5B23%5D=0&t%5B24%5D=0&t%5B25%5D=0&t%5B26%5D=0&t%5B27%5D=0&t%5B28%5D=0&t%5B29%5D=0&t%5B30%5D=0&s1.x="+ item.x +"&s1.y="+ item.y +"&s1=ok";
+				break;
+			case '3':
+				data = "id="+ item.id +"&c=4&t%5B21%5D=0&t%5B22%5D=0&t%5B23%5D="+ farmSettings.number +"&t%5B24%5D=0&t%5B25%5D=0&t%5B26%5D=0&t%5B27%5D=0&t%5B28%5D=0&t%5B29%5D=0&t%5B30%5D=0&s1.x="+ item.x +"&s1.y="+ item.y +"&s1=ok";
+				break;
+			case '4':
+				data = "id="+ item.id +"&c=4&t%5B21%5D=0&t%5B22%5D=0&t%5B23%5D=0&t%5B24%5D="+ farmSettings.number +"&t%5B25%5D=0&t%5B26%5D=0&t%5B27%5D=0&t%5B28%5D=0&t%5B29%5D=0&t%5B30%5D=0";
+				break;
+			case '5':
+				data = "id="+ item.id +"&c=4&t%5B21%5D=0&t%5B22%5D=0&t%5B23%5D=0&t%5B24%5D=0&t%5B25%5D="+ farmSettings.number +"&t%5B26%5D=0&t%5B27%5D=0&t%5B28%5D=0&t%5B29%5D=0&t%5B30%5D=0";
+				break;
+			case '6':
+				data = "id="+ item.id +"&c=4&t%5B21%5D=0&t%5B22%5D=0&t%5B23%5D=0&t%5B24%5D=0&t%5B25%5D=0&t%5B26%5D="+ farmSettings.number +"&t%5B27%5D=0&t%5B28%5D=0&t%5B29%5D=0&t%5B30%5D=0";
+				break;
+		}
+	} else if (tribeSettings.tribe == 4){
+		switch(tribeSettings.farm){
+			case '1':
+				data = "id="+ item.id +"&c=4&t%5B51%5D="+ farmSettings.number +"&t%5B52%5D=0&t%5B53%5D=0&t%5B54%5D=0&t%5B55%5D=0&t%5B56%5D=0&t%5B57%5D=0&t%5B58%5D=0&t%5B59%5D=0&t%5B60%5D=0";
+				break;
+			case '2':
+				data = "id="+ item.id +"&c=4&t%5B51%5D=0&t%5B52%5D="+ farmSettings.number +"&t%5B53%5D=0&t%5B54%5D=0&t%5B55%5D=0&t%5B56%5D=0&t%5B57%5D=0&t%5B58%5D=0&t%5B59%5D=0&t%5B60%5D=0";
+				break;
+			case '3':
+				data = "id="+ item.id +"&c=4&t%5B51%5D=0&t%5B52%5D=0&t%5B53%5D="+ farmSettings.number +"&t%5B54%5D=0&t%5B55%5D=0&t%5B56%5D=0&t%5B57%5D=0&t%5B58%5D=0&t%5B59%5D=0&t%5B60%5D=0&s1.x="+ item.x +"&s1.y="+ item.y +"&s1=ok";
+				break;
+			case '4':
+				alert('Indisponível');
+				return false;
+			case '5':
+				alert('Indisponível');
+				return false;
+			case '6':
+				alert('Indisponível');
+				return false;
+		}
+		
+	} else if (tribeSettings.tribe == 5){
+		switch(tribeSettings.farm){
+			case '1':
+				alert('Indisponível');
+				return false;
+			case '2':
+				alert('Indisponível');
+				return false;
+			case '3':
+				data = "id="+ item.id +"&c=4&t%5B100%5D=0&t%5B101%5D=0&t%5B102%5D="+ farmSettings.number +"&t%5B103%5D=0&t%5B104%5D=0&t%5B105%5D=0&t%5B106%5D=0&t%5B107%5D=0&t%5B108%5D=0&t%5B109%5D=0&s1.x="+ item.x +"&s1.y="+ item.y +"&s1=ok";
+				break;
+			case '4':
+				alert('Indisponível');
+				return false;
+			case '5':
+				data = "id="+ item.id +"&c=4&t%5B100%5D=0&t%5B101%5D=0&t%5B102%5D=0&t%5B103%5D=0&t%5B104%5D="+ farmSettings.number +"&t%5B105%5D=0&t%5B106%5D=0&t%5B107%5D=0&t%5B108%5D=0&t%5B109%5D=0&s1.x="+ item.x +"&s1.y="+ item.y +"&s1=ok";
+				break;
+			case '6':
+				alert('Indisponível');
+				return false;
+		}
+		
+	}
+	log(data);
+	
+	GM_xmlhttpRequest({
+		method: "POST",
+		url: "v2v.php",
+		data: data,
+		headers: {
+			"Content-Type": "application/x-www-form-urlencoded"
+		},
+		onload: function(response) {
+			log('('+ item.x + '|'+ item.y +') || '+ (new Date).toLocaleTimeString());
+			
+			var captcha = $(response.responseText).find('form img#captcha_image');
+			if (captcha.length){
+				$('div#mainOgum fieldset#receiveCaptcha').html('<legend>Captcha</legend><img src="'+ captcha.attr('src') +'"/><br /><input id="capCode" />');
+				$('div#mainOgum fieldset#sendFarm input#sendFarmCheck').attr('checked', false);
+				setSession('sendFarm', false);
+				$('div#mainOgum fieldset#receiveCaptcha input#capCode').focus();
+				
+				$('div#mainOgum fieldset#receiveCaptcha input#capCode').keydown(function (e){
+					var cCode = $('div#mainOgum fieldset#receiveCaptcha input#capCode').val();
+					
+					if (e.keyCode == 13){
+						data = 't%5B11%5D=&t%5B14%5D=&t%5B17%5D=&t%5B19%5D=&t%5B12%5D=&t%5B15%5D=&t%5B18%5D=&t%5B20%5D=&t%5B13%5D=&t%5B16%5D=&c=2&dname=&x='+ item.x +'&y='+ item.y +'&captcha_code='+ cCode +'&s1.x=41&s1.y=14';
+						
+						GM_xmlhttpRequest({
+							method: "POST",
+							url: "v2v.php",
+							data: data,
+							headers: {
+								"Content-Type": "application/x-www-form-urlencoded"
+							},
+							onload: function(response) {
+								log(cCode);
+								$('div#mainOgum fieldset#sendFarm input#sendFarmCheck').attr('checked', true);
+								setSession('sendFarm', true);
+								$('div#mainOgum fieldset#receiveCaptcha').html('<legend>Captcha</legend>');
+							}
+						});
+					}
+				});
+			} else {
+				
+				GM_xmlhttpRequest({
+					method: "POST",
+					url: "v2v.php",
+					data: data + '&capa=' +capValue,
+					headers: {
+						"Content-Type": "application/x-www-form-urlencoded"
+					},
+					onload: function(response) {
+						//log('('+ item.x + '|'+ item.y +') || '+ (new Date).toLocaleTimeString());
+						var captcha = $(response.responseText).find('form input[name=capa]');
+						if (captcha.length){
+							log('CAP');
+						}
+					}
+				});
+				
+				
+			}
+		}
+	});
+}
+
+function addFarm(id, x, y){
+	var farmList = getLocal('farmList');
+
+	if (farmList == null){
+		farmList = new Array();
+	}
+	
+	for (var i=0; i<farmList.length; i++){
+		if ((farmList[i].x == x) && (farmList[i].y == y)){
+			removeFarm(x, y);
+			
+			return false;
+		}
+	}
+	
+	var item = {id: id, x: x, y: y};
+	log(item);
+	farmList.push(item);
+	
+	log(farmList);
+	setLocal('farmList', farmList);
+}
+
+function inFarmList(x, y){
+	var farmList = getLocal('farmList');
+	
+	if (farmList == null){
+		farmList = new Array();
+		setLocal('farmList', farmList);
+		return false;
+	}
+	
+	for (var i=0; i<farmList.length; i++){
+		if ((farmList[i].x == x) && (farmList[i].y == y)){
+			
+			return true;
+		}
+	}
+	
+	return false;
+}
+
+function removeFarm(x, y){
+	var farmList = getLocal('farmList');
+	
+	for (var i=0; i<farmList.length; i++){
+		if ((farmList[i].x == x) && (farmList[i].y == y)){
+			farmList.splice(i, 1);
+			setLocal('farmList', farmList);
+			log(farmList);
+			
+			return true;
+		}
+	}
+}
+
+function login(f){
+	log('Login');
+				
+	var passworde = 'daqamedi';
+	var submit = 5;
+	var s1x = 27;
+	var s1y = 10;
+
+	GM_xmlhttpRequest({
+		method: "GET",
+		url: "pwd2.php",
+		method: "POST",
+		data: "Passworde="+ passworde + "&submit=" + submit + "&s1.x=" + s1x + "&s1.y=" + s1y,
+		headers: {
+			"Content-Type": "application/x-www-form-urlencoded"
+		},
+		onload: function(response) {
+			log("Passworde="+ passworde + "&submit=" + submit + "&s1.x=" + s1x + "&s1.y=" + s1y);
+			f.call();
+		}
+	});
+
+}
+
+function buildTroops(){
+	if (!(getSession('buildTroops'))){
+		return false;
+	}	
+	log('Vai');
+	var data;
+	var max;
+	var tribeSettings = getLocal('tribeSettings');
+	var buildingId = '23';
+	
+	if (tribeSettings.tribe == 2){
+		if (tribeSettings.build > 4){
+			buildingId = '27';
+		}
+	} else if (tribeSettings.tribe == 3){
+		if (tribeSettings.build > 2){
+			buildingId = '27';
+		}
+	} else if (tribeSettings.tribe == 4){
+		if (tribeSettings.build > 4){
+			buildingId = '27';
+		}	
+	} else if (tribeSettings.tribe == 5){
+		if (tribeSettings.build > 4){
+			buildingId = '27';
+		}	
+	} else if (tribeSettings.build > 3){
+		buildingId = '27';
+	}
+
+	var regx;
+	GM_xmlhttpRequest({
+		method: "GET",
+		url: "build.php?id="+ buildingId,
+		onload: function(response) {
+			if (($(response.responseText).find('form input[type="password"]').length)){
+				log('PASSSS');
+				aa();
+				var pass = $(response.responseText).find('form input[name="New_time"]').closest('center').find('font').html();
+			
+				GM_xmlhttpRequest({
+					method: "GET",
+					url: "online.php?=ok",
+					method: "POST",
+					data: "New_time="+ pass,
+					headers: {
+						"Content-Type": "application/x-www-form-urlencoded"
+					},
+					onload: function(response) {
+						log("New_time="+ pass);
+					}
+				});
+			}
+			
+			///
+			if (tribeSettings.tribe == 1){
+				switch(tribeSettings.build){
+					case '1':
+						alert('Nao constroi essa tropa');
+						return false;
+					case '2':
+						regx = /_\('_tf2'\)\.value=([0-9]+)/;
+						break;
+					case '3':
+						regx = /_\('_tf3'\)\.value=([0-9]+)/;
+						break;
+					case '4':
+						regx = /_\('_tf4'\)\.value=([0-9]+)/;
+						break;
+					case '5':
+						alert('Nao constroi essa tropa');
+						return false;
+					case '6':
+						regx = /_\('_tf6'\)\.value=([0-9]+)/;
+						break;
+				}
+				
+			} else if (tribeSettings.tribe == 2){
+				switch(tribeSettings.build){
+					case '1':
+						regx = /_\('_tf11'\)\.value=([0-9]+)/;
+						break;
+					case '2':
+						regx = /_\('_tf12'\)\.value=([0-9]+)/;
+						break;
+					case '3':
+						regx = /_\('_tf13'\)\.value=([0-9]+)/;
+						break;
+					case '4':
+						regx = /_\('_tf14'\)\.value=([0-9]+)/;
+						break;
+					case '5':
+						regx = /_\('_tf15'\)\.value=([0-9]+)/;
+						break;
+					case '6':
+						regx = /_\('_tf16'\)\.value=([0-9]+)/;
+						break;
+				}
+			} else if (tribeSettings.tribe == 3){
+				log('gaul');
+				switch(tribeSettings.build){
+					case '1':
+						regx = /_\('_tf21'\)\.value=([0-9]+)/;
+						break;
+					case '2':
+						regx = /_\('_tf22'\)\.value=([0-9]+)/;
+						break;
+					case '3':
+						regx = /_\('_tf23'\)\.value=([0-9]+)/;
+						break;
+					case '4':
+						regx = /_\('_tf24'\)\.value=([0-9]+)/;
+						break;
+					case '5':
+						regx = /_\('_tf25'\)\.value=([0-9]+)/;
+						break;
+					case '6':
+						regx = /_\('_tf26'\)\.value=([0-9]+)/;
+						break;
+				}
+			} else if (tribeSettings.tribe == 4){
+				switch(tribeSettings.build){
+					case '1':
+						regx = /_\('_tf51'\)\.value=([0-9]+)/;
+						break;
+					case '2':
+						regx = /_\('_tf52'\)\.value=([0-9]+)/;
+						break;
+					case '3':
+						regx = /_\('_tf53'\)\.value=([0-9]+)/;
+						break;
+					case '4':
+						regx = /_\('_tf54'\)\.value=([0-9]+)/;
+						break;
+					case '5':
+						alert('Nao constroi essa tropa');
+						return false;
+					case '6':
+						alert('Nao constroi essa tropa');
+						return false;
+				}
+				
+			} else if (tribeSettings.tribe == 5){
+				switch(tribeSettings.build){
+					case '1':
+						alert('Nao constroi essa tropa');
+						return false;
+					case '2':
+						regx = /_\('_tf101'\)\.value=([0-9]+)/;
+						break;
+					case '3':
+						regx = /_\('_tf102'\)\.value=([0-9]+)/;
+						break;
+					case '4':
+						regx = /_\('_tf103'\)\.value=([0-9]+)/;
+						break;
+					case '5':
+						regx = /_\('_tf104'\)\.value=([0-9]+)/;
+						break;
+					case '6':
+						alert('Nao constroi essa tropa');
+						return false;
+				}
+				//var match = $(element).attr('onclick').match(/_\('_tf101'\)\.value=([0-9]+)/); //thorn warrior
+				//var match = $(element).attr('onclick').match(/_\('_tf102'\)\.value=([0-9]+)/); //guards
+				//var match = $(element).attr('onclick').match(/_\('_tf103'\)\.value=([0-9]+)/); //birds
+				//var match = $(element).attr('onclick').match(/_\('_tf104'\)\.value=([0-9]+)/); //fares persians
+				
+				//data: "tf%5B100%5D=0&tf%5B102%5D="+ max +"&tf%5B103%5D=0&s1.x=21&s1.y=10&s1=ok", //guard
+				//data: "tf%5B100%5D=0&tf%5B102%5D=0&tf%5B103%5D="+ max +"&s1.x=80&s1.y=10&s1=ok",	//bird
+				//data: "tf%5B100%5D=0&tf%5B101%5D="+ max +"&tf%5B102%5D=0&tf%5B103%5D=0&s1.x=66&s1.y=9&s1=ok", //thorn warrior
+				//data: "tf%5B104%5D="+ max +"&tf%5B105%5D=0&s1.x=62&s1.y=7&s1=ok", //fares persians
+			}
+			///
+		
+			$(response.responseText).find('div#build form table tr td.max a').each(function(index, element){
+				var match = $(element).attr('onclick').match(regx);
+				
+				log(regx);
+				if (match != null){
+					if (tribeSettings.tribe == 1){
+						//data: "tf%5B1%5D=0&tf%5B2%5D="+ max +"&tf%5B3%5D=0&s1.x=65&s1.y=14&s1=ok", //pretoriano
+						//data: "tf%5B1%5D=0&tf%5B2%5D=0&tf%5B3%5D="+ max +"&s1.x=59&s1.y=8&s1=ok", //imperiano
+						//data: "tf%5B4%5D=0&tf%5B5%5D=0&tf%5B6%5D="+ max +"&s1.x=46&s1.y=7&s1=ok", //Equites caesaris
+						switch(tribeSettings.build){
+							case '1':
+								//data = "tf%5B1%5D=0&tf%5B2%5D="+ match[1] +"&tf%5B3%5D=0&s1.x=65&s1.y=14&s1=ok";
+								break;
+							case '2':
+								data = "tf%5B1%5D=0&tf%5B2%5D="+ match[1] +"&tf%5B3%5D=0&s1.x=65&s1.y=14&s1=ok";
+								break;
+							case '3':
+								data = "tf%5B1%5D=0&tf%5B2%5D=0&tf%5B3%5D="+ match[1] +"&s1.x=59&s1.y=8&s1=ok";
+								break;
+							case '4':
+								data = "tf%5B4%5D="+ match[1] +"&tf%5B5%5D=0&tf%5B6%5D=0&s1.x=63&s1.y=9&s1=ok";
+								break;
+							case '5':
+								//data = "tf%5B1%5D=0&tf%5B2%5D=0&tf%5B3%5D="+ match[1] +"&s1.x=59&s1.y=8&s1=ok";
+								break;
+							case '6':
+								data = "tf%5B4%5D=0&tf%5B5%5D=0&tf%5B6%5D="+ match[1] +"&s1.x=46&s1.y=7&s1=ok";
+								break;
+							
+						}
+						
+					} else if (tribeSettings.tribe == 2){
+						//data: "tf%5B11%5D="+ max +"&tf%5B12%5D=0&tf%5B13%5D=0&s1.x=31&s1.y=10&s1=ok", //Salteador
+						//data: "tf%5B15%5D="+ max +"&tf%5B16%5D=0&s1.x=65&s1.y=7&s1=ok", //Paladin
+						//data: "tf%5B15%5D=0&tf%5B16%5D="+ max +"&s1.x=61&s1.y=7&s1=ok", //Teutonic knight
+						switch(tribeSettings.build){
+							case '1':
+								data = "tf%5B11%5D="+ match[1] +"&tf%5B12%5D=0&tf%5B13%5D=0&s1.x=31&s1.y=10&s1=ok";
+								break;
+							case '2':
+								data = "tf%5B11%5D=0&tf%5B12%5D="+ match[1] +"&tf%5B13%5D=0&tf%5B14%5D=0&s1.x=55&s1.y=8";
+								break;
+							case '3':
+								data = "tf%5B11%5D=0&tf%5B12%5D=0&tf%5B13%5D="+ match[1] +"&tf%5B14%5D=0&s1.x=85&s1.y=6&s1=ok";
+								break;
+							case '4':
+								data = "tf%5B11%5D=0&tf%5B12%5D=0&tf%5B13%5D=0&tf%5B14%5D="+ match[1] +"&s1.x=68&s1.y=9";
+								break;
+							case '5':
+								data = "tf%5B15%5D="+ match[1] +"&tf%5B16%5D=0&s1.x=65&s1.y=7&s1=ok";
+								break;
+							case '6':
+								data = "tf%5B15%5D=0&tf%5B16%5D="+ match[1] +"&s1.x=61&s1.y=7&s1=ok";
+								break;
+						}
+					} else if (tribeSettings.tribe == 3){
+						switch(tribeSettings.build){
+							case '1':
+								data = "tf%5B21%5D="+ match[1] +"&s1.x=78&s1.y=7&s1=ok";
+								break;
+							case '2':
+								data = "tf%5B21%5D=0&tf%5B22%5D="+ match[1] +"&s1.x=65&s1.y=6";
+								break;
+							case '3':
+								data = "tf%5B23%5D="+ match[1] +"&tf%5B24%5D=0&tf%5B25%5D=0&tf%5B26%5D=0&s1.x=70&s1.y=8";
+								break;
+							case '4':
+								data = "tf%5B23%5D=0&tf%5B24%5D="+ match[1] +"&tf%5B25%5D=0&tf%5B26%5D=0&s1.x=45&s1.y=10&s1=ok";
+								break;
+							case '5':
+								data = "tf%5B23%5D=0&tf%5B24%5D=0&tf%5B25%5D="+ match[1] +"&tf%5B26%5D=0&s1.x=68&s1.y=13";
+								break;
+							case '6':
+								data = "tf%5B23%5D=0&tf%5B24%5D=0&tf%5B25%5D=0&tf%5B26%5D="+ match[1] +"&s1.x=67&s1.y=16";
+								break;
+						}
+					} else if (tribeSettings.tribe == 4){
+						//data: "tf%5B51%5D=0&tf%5B52%5D="+ max +"&tf%5B53%5D=0&tf%5B54%5D=0&s1.x=75&s1.y=9&s1=ok", //Swordsman
+						//data: "tf%5B51%5D=0&tf%5B52%5D=0&tf%5B53%5D="+ max +"&tf%5B54%5D=0&s1.x=39&s1.y=14&s1=ok", //Fierce striker
+						switch(tribeSettings.build){
+							case '1':
+								data = "tf%5B51%5D="+ match[1] +"&tf%5B52%5D=0&tf%5B53%5D=0&tf%5B54%5D=0&s1.x=53&s1.y=7&s1=ok";
+								break;
+							case '2':
+								data = "tf%5B51%5D=0&tf%5B52%5D="+ match[1] +"&tf%5B53%5D=0&tf%5B54%5D=0&s1.x=75&s1.y=9&s1=ok";
+								break;
+							case '3':
+								data = "tf%5B51%5D=0&tf%5B52%5D=0&tf%5B53%5D="+ match[1] +"&tf%5B54%5D=0&s1.x=39&s1.y=14&s1=ok";
+								break;
+							case '4':
+								data = "tf%5B51%5D=0&tf%5B52%5D=0&tf%5B53%5D=0&tf%5B54%5D="+ match[1] +"&s1.x=57&s1.y=6&s1=ok";
+								break;
+							case '5':
+								//data = "tf%5B51%5D=0&tf%5B52%5D=0&tf%5B53%5D="+ match[1] +"&tf%5B54%5D=0&s1.x=39&s1.y=14&s1=ok";
+								break;
+							case '6':
+								//data = "tf%5B51%5D=0&tf%5B52%5D=0&tf%5B53%5D="+ match[1] +"&tf%5B54%5D=0&s1.x=39&s1.y=14&s1=ok";
+								break;
+						}
+						
+					} else if (tribeSettings.tribe == 5){
+						log(tribeSettings);
+						//data: "tf%5B100%5D=0&tf%5B101%5D="+ max +"&tf%5B102%5D=0&tf%5B103%5D=0&s1.x=66&s1.y=9&s1=ok", //thorn warrior
+						//data: "tf%5B100%5D=0&tf%5B102%5D="+ max +"&tf%5B103%5D=0&s1.x=21&s1.y=10&s1=ok", //guard
+						//data: "tf%5B100%5D=0&tf%5B102%5D=0&tf%5B103%5D="+ max +"&s1.x=80&s1.y=10&s1=ok",	//bird
+						//data: "tf%5B104%5D="+ max +"&tf%5B105%5D=0&s1.x=62&s1.y=7&s1=ok", //fares persians
+						switch(tribeSettings.build){
+							case '1':
+								//data = "tf%5B51%5D="+ match[1] +"&tf%5B52%5D=0&tf%5B53%5D=0&tf%5B54%5D=0&s1.x=53&s1.y=7&s1=ok";
+								break;
+							case '2':
+								data = "tf%5B100%5D=0&tf%5B101%5D="+ match[1] +"&tf%5B102%5D=0&tf%5B103%5D=0&s1.x=66&s1.y=9&s1=ok";
+								break;
+							case '3':
+								data = "tf%5B100%5D=0&tf%5B102%5D="+ match[1] +"&tf%5B103%5D=0&s1.x=21&s1.y=10&s1=ok";
+								break;
+							case '4':
+								data = "tf%5B100%5D=0&tf%5B102%5D=0&tf%5B103%5D="+ match[1] +"&s1.x=80&s1.y=10&s1=ok";
+								break;
+							case '5':
+								data = "tf%5B104%5D="+ match[1] +"&tf%5B105%5D=0&s1.x=62&s1.y=7&s1=ok";
+								break;
+							case '6':
+								//data = "id="+ item.id +"&c=4&t%5B100%5D=0&t%5B101%5D=0&t%5B102%5D=0&t%5B103%5D=0&t%5B104%5D="+ farmSettings.number +"&t%5B105%5D=0&t%5B106%5D=0&t%5B107%5D=0&t%5B108%5D=0&t%5B109%5D=0&s1.x="+ item.x +"&s1.y="+ item.y +"&s1=ok";
+								break;
+						}
+						
+					}
+					log(data);
+
+					GM_xmlhttpRequest({
+						method: "POST",
+						url: "build.php?id="+ buildingId,
+						data: data,
+						headers: {
+							"Content-Type": "application/x-www-form-urlencoded"
+						},
+						onload: function(response) {
+							log(match[1] + ' // ' + (new Date).toLocaleTimeString());
+							
+							var troopCounter = getLocal('troopCounter');
+		
+							if (!troopCounter){
+								troopCounter = {
+									'amount': 0,
+									'time': new Date,
+								};
+							}
+							
+							troopCounter.amount += parseInt(match[1], 10);
+							setLocal('troopCounter', troopCounter);
+							updateTroopCounter();
+							
+							var oasis = new Object;
+							oasis.id = '5180';
+							oasis.x = '12';
+							oasis.y = '-34';
+				/*
+							GM_xmlhttpRequest({
+								method: "POST",
+								url: "v2v.php",
+								//data: "id=1590&c=2&t%5B100%5D=0&t%5B101%5D=0&t%5B102%5D=0&t%5B103%5D="+ max +"&t%5B104%5D=0&t%5B105%5D=0&t%5B106%5D=0&t%5B107%5D=0&t%5B108%5D=0&t%5B109%5D=0&s1.x=17&s1.y=6&s1=ok",
+								data: "id="+ oasis.id +"&c=2&t%5B100%5D=0&t%5B101%5D=0&t%5B102%5D="+ match[1] +"&t%5B103%5D=0&t%5B104%5D=0&t%5B105%5D=0&t%5B106%5D=0&t%5B107%5D=0&t%5B108%5D=0&t%5B109%5D=0&s1.x="+ oasis.x +"&s1.y="+ oasis.y +"&s1=ok",
+								headers: {
+									"Content-Type": "application/x-www-form-urlencoded"
+								},
+								onload: function(response) {
+									log(new Date());
+									log("Envio: "+ match[1]);
+								}
+							});
+							*/
+						}
+					});
+				}
+			});
+		}
+	});	
+}
+
+function spyVillage(id, x, y, quantity, tribe){
+	var tribes = {
+		'1':'spy=1&id='+ id +'&c=4&t%5B1%5D=0&t%5B2%5D=0&t%5B3%5D=0&t%5B4%5D='+ quantity +'&t%5B5%5D=0&t%5B6%5D=0&t%5B7%5D=0&t%5B8%5D=0&t%5B9%5D=0&t%5B10%5D=0&s1.x='+ x +'&s1.y='+ y +'&s1=ok',
+		'2':'spy=1&id='+ id +'&c=4&t%5B11%5D=0&t%5B12%5D=0&t%5B13%5D=0&t%5B14%5D='+ quantity +'&t%5B15%5D=0&t%5B16%5D=0&t%5B17%5D=0&t%5B18%5D=0&t%5B19%5D=0&t%5B20%5D=0',
+		'3':'spy=1&id='+ id +'&c=4&t%5B21%5D=0&t%5B22%5D=0&t%5B23%5D='+ quantity +'&t%5B24%5D=0&t%5B25%5D=0&t%5B26%5D=0&t%5B27%5D=0&t%5B28%5D=0&t%5B29%5D=0&t%5B30%5D=0&s1.x='+ x +'&s1.y='+ y +'&s1=ok',
+		'4':'spy=1&id='+ id +'&c=4&t%5B51%5D=0&t%5B52%5D=0&t%5B53%5D=0&t%5B54%5D='+ quantity +'&t%5B55%5D=0&t%5B56%5D=0&t%5B57%5D=0&t%5B58%5D=0&t%5B59%5D=0&t%5B60%5D=0&s1.x='+ x +'&s1.y='+ y +'&s1=ok',
+		'5':''
+	};
+	
+	log(tribes[tribe]);
+	
+	GM_xmlhttpRequest({
+		method: "POST",
+		url: "v2v.php",
+		data: tribes[tribe],
+		headers: {
+			"Content-Type": "application/x-www-form-urlencoded"
+		},
+		onload: function(response) {
+			log(x +' '+ y);
+		}
+	});
+}
+
+function sendSpies(sendList){
+	var profile = sendList.shift();
+	var villages = new Array;
+	var tribeSettings = getLocal('tribeSettings');
+	
+	if (!tribeSettings){
+		alert('Defina a tribo na página do perfil');
+		return false;
+	}
+	
+	GM_xmlhttpRequest({
+		method: "GET",
+		url: profile,
+		onload: function(response) {
+			$(response.responseText).find('table#villages tbody tr').each(function(index, element){
+				if ($(element).find('td.aligned_coords').length > 0){ //A nova tabela de medalhas tambem tem o id villages		
+					var match = $(element).find('td.aligned_coords').text().match(/\((-?[0-9]+)\|(-?[0-9]+)\)/);
+					log(match);
+					var id = $(element).find('td.nam a').attr('href').match(/village3\.php\?id=([0-9]+)/)[1];
+					log(id);
+					if (!inFarmList(match[1], match[2])){
+						spyVillage(id, match[1], match[2], 1, tribeSettings.tribe);
+					}
+				
+				}
+			});
+
+			if (sendList.length > 0){
+				sendSpies(sendList);
+			}
+		}
+	});
+}

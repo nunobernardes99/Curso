@@ -1,0 +1,4 @@
+succ x -> valor sucessor a x
+min a b -> minimo entre a e b
+max a b -> maximo entre a e b
+a `div `b -> Recebe dois integrais e faz uma divisão integral entre os dois valores

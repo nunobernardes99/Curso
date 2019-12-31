@@ -1,0 +1,23 @@
+Complexidade de algoritmos (Exemplo)
+
+	PosMin(v,k,n)
+	1. | pmin <- k;						// c1: atribuir valor variável.
+	2. | Para i <- k+1 até n fazer		// c2: incrementar valor variável, testar condição, transferir controlo.
+	3. | 	Se v[i] < v[pmin] então		// c3: aceder, testar e transferir controlo.
+	4. | 		pmin <- i;				// c4: c1.
+	5. | retorna pmin;					// c5: retorna valor da função com valor variável.
+
+A) Melhor caso: v[k] é estritamente menos que os restantes elementos. (executa 0 vezes)
+B) Pior caso: v[k] > v[k+1] > ... > v[n-1] > v[n]. (executa n-k vezes)
+ - Instruções 1 e 5 executadas só uma vez.
+ - Teste instrução 3 para i=k+1, ..., n, n+1, ou seja (n+1) - (k+1) + 1 = n-k+1 vezes
+ - Executa instrução 3 para i=k+1, ..., n, ou seja, (n) - (k+1) +1 = n-k vezes
+ - Executa linha 4:
+ 	Melhor caso: 0 vezes (em A).
+ 	Pior caso: n-k vezes (em B).
+
+No melhor caso: c1 + c5 + (n-k+1)c2 + (n-k)c3 = (retirando as constantes que nao afetam à complexidade) c1 + c5 + (c3+c3)(n-k)
+No pior caso: c1 + c5 + (n-k+1)c2 + (n-k)(c3+c4) = (retirando as constantes que nao afetam à complexidade) c1 + c5 + (c3+c3+c4)(n-k)
+
+Sendo a=minc*ct e b=maxc*ct (para so existirem duas variáveis e não c1, c2, c3, c4 e c5) concluimos:
+		2a + 2a(n-k) <= T(n,k) <= 2a + 3a(n-k)

@@ -1,0 +1,20 @@
+Trabalho feito por Fábio Silva nº mecanográfico:201707021 e Nuno Bernardes nº mecanográfico:201706161 no âmbito da cadeira de Laboratório de Programação.
+
+Para compilar o programa executar os seguintes comandos:
+gcc -g -c estruturas.c
+gcc -g -c hash.c
+gcc -g -c hashOperators.c
+gcc -g -c lista.c
+gcc -g -c load.c
+gcc -g -c sintaxe.c
+gcc -g -o main main.c estruturas.o hash.o hashOperators.o lista.o load.o sintaxe.o
+
+Ou usar o Makefile executando os seguintes comandos:
+make all (compila todos os ficheiros acima descritos)
+make clean (limpa todos os ficheiros "*.o" do diretório)
+
+Para executar o programa escrever o seguinte comando:
+
+./main input.txt
+
+substituir input.txt pelo nome do ficheiro a ser usado

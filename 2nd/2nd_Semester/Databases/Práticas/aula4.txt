@@ -1,0 +1,58 @@
+1) 
+    1.1)
+        1.)
+            SELECT Nome, TIMESTAMPDIFF(YEAR, DataNasc, NOW()) AS Idade FROM UTENTE;
+        2.)
+            SELECT Nome, MONTH(DataNasc), DAY(DataNasc) FROM UTENTE WHERE (YEAR(DataNasc) > 2000);
+        3.)
+            SELECT Nome FROM UTENTE WHERE Nome LIKE 'Pedro%' OR Nome LIKE '%Silva';
+        4.)
+            SELECT ISBN, Num FROM CÓPIA WHERE EmpUtente IS NOT NULL AND EmpUtente <> 1;
+        5.)
+            SELECT CONCAT(Título, ',', Editora, ',', Ano, ',', ISBN) FROM LIVRO;
+    1.2)
+        UPDATE UTENTE SET Email = UPPER(Email);
+        UPDATE CÓPIA SET Estante='E99',Prateleira=Prateleira+1  WHERE Estante LIKE 'E1%';
+2)
+    2.1)
+        1.) DEFAULT NULL
+        2.) DEFAULT 'L'
+        3.) DEFAULT NULL
+            DEFAULT NULL
+    2.2)
+        AUTOINCREMENT
+    2.3)
+        ALTER TABLE LIVRO DROP COLUMN Editora;
+        ALTER TABLE ADD COLUMN Conservacao ENUM('Novo','Bom','Mau') NOT NULL DEFAULT 'Bom';
+    2.4)
+        FOREIGN KEY(ISBN) REFERENCES AUTORES(ISBN)
+        FOREIGN KEY(ISBN) REFERENCES CÓPIA(ISBN)
+        ON UPDATE CASCADE
+3)
+    3.1) SELECT Nome FROM AUTORES ORDER BY Nome;
+    3.2) SELECT DISTINCT Nome FROM AUTORES ORDER BY Nome;
+    3.3) SELECT Nome,DataNasc FROM UTENTE WHERE Sexo='M' ORDER BY DataNasc DESC;
+    3.4) SELECT Nome,DataNasc FROM UTENTE WHERE Sexo='F' ORDER BY DataNasc DESC LIMIT 1;
+    3.5) SELECT ISBN, Num FROM CÓPIA ORDER BY ISBN, Num;
+    3.6) SELECT DISTINCT ISBN FROM CÓPIA WHERE EmpUtente IS NOT NULL;
+    3.7) SELECT ISBN FROM CÓPIA ORDER BY EmpData DESC LIMIT 3;
+4)
+    4.1) SELECT COUNT(ISBN) AS CountNum FROM CÓPIA;
+    4.2) SELECT COUNT(ISBN) AS CountNum FROM CÓPIA WHERE EmpUtente IS NOT NULL;
+    4.3) SELECT ISBN, COUNT(*) AS Emprestadas FROM CÓPIA WHERE EmpUtente IS NOT NULL GROUP BY ISBN;
+    4.4) SELECT ISBN, COUNT(*) AS Total, COUNT(EmpUtente) AS Emprestadas ,COUNT(*)-COUNT(EmpUtente) AS Disponíveis FROM CÓPIA GROUP BY ISBN HAVING Emprestadas > 2;
+    4.5) SELECT MAX(EmpData) AS 'DATA EMPRESTIMO' FROM CÓPIA WHERE EmpData IS NOT NULL GROUP BY ISBN;
+    4.6) SELECT AVG(TIMESTAMPDIFF(DAY,EmpData,NOW())) AS MÉDIA FROM CÓPIA WHERE EmpData IS NOT NULL;
+    4.7) SELECT AVG(TIMESTAMPDIFF(DAY,EmpData,NOW())) AS MÉDIA FROM CÓPIA WHERE EmpData IS NOT NULL GROUP BY ISBN;
+
+5)
+    5.1 e 5.2)    
+            SELECT U.Nome, C.ISBN, C.EmpData, L.Título
+            FROM UTENTE U, CÓPIA C, LIVRO L
+            WHERE
+                EmpData AND
+                C.ISBN = L.ISBN
+                U.Num = C.EmpUtente
+            ORDER BY
+                U.Nome, L.Título;
+    

@@ -1,0 +1,320 @@
+======================
+Users:
+    1)
+        Login: root
+        Password: sup3r7Ux
+    2)
+        Login: auser
+        Password: us3rLD4P
+    3)
+        Login: aauser
+        Password: aaus3rLD4P
+
+To enter via SSH:
+    1) Enter dcc ssh first
+        "ssh upXXXXXXX@ssh.alunos.dcc.fc.up.pt -L 8006:vms.alunos.dcc.fc.up.pt:8006 -L 3128:vms:3128"
+        Then, access localhost:8006 and turn on the LDAP machine
+    2) Inside dcc's ssh do:
+        "ssh auser@grupoz-server"
+        Password: auser Password (us3rLD4P)
+    If it doenst work, try to do a ssh-copy-id
+    (Talk with Nuno or do it by yourself following this tutorial: https://www.thegeekstuff.com/2008/11/3-steps-to-perform-ssh-login-without-password-using-ssh-keygen-ssh-copy-id)
+
+To change user:
+ "su 'nome do user'"
+To confirm which user you are:
+ "whoami"
+======================
+Aula Pratica 4
+Machine maintenance
+1) 
+    a) Doing "fdisk -l" we find:
+        Disk /dev/sda
+        Device /dev/sda1
+        Device /dev/sda2
+        Disk /dev/mapper/fedora_fedora--svr-root
+        Disk /dev/mapper/fedora_fedor--svr-swap
+    b) The error is "Cannot continue, aborting.". This happens because it's impossible to "fsck" a mounted disk.
+    c)
+        i) Doing the command "tune2fs -l /dev/sda1"
+        Maximum mount count: -1
+        ii) "tune2fs -c1 /dev/sda1"
+2)
+    a) "dnf upgrade"
+    b) Not applicable to this system.
+3)
+    a) "dnf clean packages; dnf autoremove"
+    b) Not applicable to this system.
+4)
+    1) "systemctl enable sshd; systemctl start sshd"
+
+Root maintenance
+1) New authentication on the top of this file.
+2) "adduser -N aauser"
+   "passwd aauser"
+3) Not applicable to this system.
+4) Followed this tutorial
+   https://www.thegeekstuff.com/2008/11/3-steps-to-perform-ssh-login-without-password-using-ssh-keygen-ssh-copy-id
+5) Go to "/etc/ssh/sshd_config" and change:
+    "#PermitRootLogin yes" to "#PermitRootLogin no"
+6) Go to "/etc/shadow") and change:
+    "root:{encryptedPass}:it:doesnt:matter:the:rest" to "root:!!:it:doesnt:matter:the:rest"
+    (Test after entering in root user and check if it impossible to do it). 
+======================
+Aula Pratica 5
+Booting
+1) Reboot the machine and pressing e appears 4 entrances. Enter the first on and in the third line where it says "quiet rhgb" change to "single" and press Cntr + X
+2) The server will ask the root password
+3)
+    i) When in grub, press C and write "ls"
+    Output:
+        (hd0) (hd0,msdos2) (hd0,msdos1) (hd1)
+    ii) "insmod lvm" then "ls"
+    Output:
+        (hd0) (hd0,msdos2) (hd0,msdos1) (hd1) (lvm/fedora_fedora--svr-root) (lvm/fedora_fedora--svr-swap)
+    "ls (lvm/fedora_fedora--svr-root)"
+    Output:
+        Device lvm/fedora_fedora--svr-root: Filesystem type xfs, UUID
+        3417bc67-eac2-482c-aeed-538ef72fcd77 - Secot size 512B - Total size 6496256KiB
+    v) Press ESC and CTRL+X and it will boot.
+4)
+    "ls -l /lib/systemd/system/runlevel[0-9].target"
+    Output:
+        lrwxrwxrwx. 1 root root 15 out 10 21:00 /lib/systemd/system/runlevel0.target -> poweroff.target
+        lrwxrwxrwx. 1 root root 13 out 10 21:00 /lib/systemd/system/runlevel1.target -> rescue.target
+        lrwxrwxrwx. 1 root root 17 out 10 21:00 /lib/systemd/system/runlevel2.target -> multi-user.target
+        lrwxrwxrwx. 1 root root 17 out 10 21:00 /lib/systemd/system/runlevel3.target -> multi-user.target
+        lrwxrwxrwx. 1 root root 17 out 10 21:00 /lib/systemd/system/runlevel4.target -> multi-user.target
+        lrwxrwxrwx. 1 root root 16 out 10 21:00 /lib/systemd/system/runlevel5.target -> graphical.target
+        lrwxrwxrwx. 1 root root 13 out 10 21:00 /lib/systemd/system/runlevel6.target -> reboot.target
+    a) Rescue is on runlevel 1
+======================
+Aula Pratica 6
+
+Sistema de ficheiros
+1) "dd if=/dev/zero of=disk bs=1024 count=10000"
+2) "rm disk" then "dd if=/dev/zero of=disk bs=1024 count=20000"
+3) "mkfs.ext4 disk"
+Output:
+    mke2fs 1.44.6 (5-Mar-2019)
+    Discarding device blocks: done                            
+    Creating filesystem with 20000 1k blocks and 5016 inodes
+    Filesystem UUID: f086037d-90e1-4bbd-a773-1028dc5f2e2b
+    Superblock backups stored on blocks: 
+        8193
+
+    Allocating group tables: done                            
+    Writing inode tables: done                            
+    Creating journal (1024 blocks): done
+    Writing superblocks and filesystem accounting information: done
+4) "mkfs.xfs disk"
+Output:
+    meta-data=disk                   isize=512    agcount=1, agsize=5000 blks
+             =                       sectsz=512   attr=2, projid32bit=1
+             =                       crc=1        finobt=1, sparse=1, rmapbt=0
+             =                       reflink=0
+    data     =                       bsize=4096   blocks=5000, imaxpct=25
+             =                       sunit=0      swidth=0 blks
+    naming   =version 2              bsize=4096   ascii-ci=0, ftype=1
+    log      =internal log           bsize=4096   blocks=855, version=2
+             =                       sectsz=512   sunit=0 blks, lazy-count=1
+    realtime =none                   extsz=4096   blocks=0, rtextents=0
+5) "mkdir file_system" then "mount disk file_system"
+6) "cat > test1.txt" *Create a test file just for the purpose of the exercise" then "umount file_system"
+7) The directory doesn't have any files. When creatin a test file, no problem.
+8) When mounted again, it appears again the test file that was created at 6. When umount again appears the file that was created in 7. The conclusion is that when we create files with the fily system mount, we see the files when we have the system mounted, and vice-versa.
+
+Utilizaccao e permissoes
+1) Command "fuser 22/tcp" not found. "lsof -i -a -p `pgrep -d ',' sshd"
+Output:
+    COMMAND PID  USER   FD   TYPE DEVICE SIZE/OFF NODE NAME
+    sshd    773  root    5u  IPv4  27275      0t0  TCP *:ssh (LISTEN)
+    sshd    773  root    7u  IPv6  27284      0t0  TCP *:ssh (LISTEN)
+    sshd    953  root    5u  IPv4  31122      0t0  TCP server.alunos.dcc.fc.up.pt:ssh->ssh.alunos.dcc.fc.up.pt:55959 (ESTABLISHED)
+    sshd    965 auser    5u  IPv4  31122      0t0  TCP server.alunos.dcc.fc.up.pt:ssh->ssh.alunos.dcc.fc.up.pt:55959 (ESTABLISHED)
+2) Not worth the time.
+3) Same at 2.
+======================
+Aula Pratica 7
+
+RAID 5 e falhas
+1) "dd if=/dev/zero of=disc1 bs=1024 count=100000;
+    dd if=/dev/zero of=disc2 bs=1024 count=100000;
+    dd if=/dev/zero of=disc3 bs=1024 count=100000;
+    dd if=/dev/zero of=disc4 bs=1024 count=100000;
+    dd if=/dev/zero of=disc5 bs=1024 count=100000;
+    dd if=/dev/zero of=disc6 bs=1024 count=100000;
+    dd if=/dev/zero of=disc7 bs=1024 count=100000;
+    dd if=/dev/zero of=disc8 bs=1024 count=100000"
+    then
+    "losetup --find --show disc1"
+    Output:
+        /dev/loop0
+    "losetup --find --show disc2"
+    Output:
+        /dev/loop1
+    "losetup --find --show disc3"
+    Output:
+        /dev/loop2
+    "losetup --find --show disc4"
+    Output:
+        /dev/loop3
+    "losetup --find --show disc5"
+    Output:
+        /dev/loop4
+    "losetup --find --show disc6"
+    Output:
+        /dev/loop5
+    "losetup --find --show disc7"
+    Output:
+        /dev/loop6
+    "losetup --find --show disc8"
+    Output:
+        /dev/loop7
+2) First, fint the identifiers for the raw disks that you will be using:
+   "lsblk -o NAME,SIZE,FSTYPE,TYPE,MOUNTPOINT"
+   Then, for /dev/md0 do:
+   "mdadm --create --verbose /dev/md0 --level=5 --raid-devices=4 /dev/loop0 /dev/loop1 /dev/loop2 /dev/loop3"
+   Output:
+    mdadm: layout defaults to left-symmetric
+    mdadm: layout defaults to left-symmetric
+    mdadm: chunk size defaults to 512K
+    mdadm: size set to 97792K
+    mdadm: Defaulting to version 1.2 metadata
+    mdadm: array /dev/md0 started.
+   And for /dev/md1 do:
+   "mdadm --create --verbose /dev/md1 --level=5 --raid-devices=4 /dev/loop4 /dev/loop5 /dev/loop6 /dev/loop7"
+   Output:
+    mdadm: layout defaults to left-symmetric
+    mdadm: layout defaults to left-symmetric
+    mdadm: chunk size defaults to 512K
+    mdadm: size set to 97792K
+    mdadm: Defaulting to version 1.2 metadata
+    mdadm: array /dev/md1 started.
+a) "cat /proc/mdstat"
+Output:
+  Personalities : [raid6] [raid5] [raid4] 
+    md1 : active raid5 loop7[4] loop6[2] loop5[1] loop4[0]
+        293376 blocks super 1.2 level 5, 512k chunk, algorithm 2 [4/4] [UUUU]
+        
+    md0 : active raid5 loop3[4] loop2[2] loop1[1] loop0[0]
+        293376 blocks super 1.2 level 5, 512k chunk, algorithm 2 [4/4] [UUUU]
+        
+    unused devices: <none>
+b)  Watch is used to run any arbitrary command at regular intervals and displays the output of the command on the terminal window.
+c) "mdadm /dev/md0"
+Output:
+    /dev/md0: 286.50MiB raid5 4 devices, 0 spares. Use mdadm --detail for more detail.
+3) First, fint the identifiers for the raw disks that you will be using:
+   "lsblk -o NAME,SIZE,FSTYPE,TYPE,MOUNTPOINT"
+   Then do:
+   "mdadm --create --verbose /dev/md2 --level=1 --raid-devices=2 /dev/md0 /dev/md1"
+   Output:
+    mdadm: Note: this array has metadata at the start and
+        may not be suitable as a boot device.  If you plan to
+        store '/boot' on this device please ensure that
+        your boot-loader understands md/v1.x metadata, or use
+        --metadata=0.90
+    mdadm: size set to 292352K
+    Continue creating array? y
+    mdadm: Defaulting to version 1.2 metadata
+    mdadm: array /dev/md2 started.
+4) "mdadm -Q /dev/md0"
+Output:
+    /dev/md0: 286.50MiB raid5 4 devices, 0 spares. Use mdadm --detail for more detail.
+    /dev/md0: device 0 in 2 device active raid1 /dev/md2.  Use mdadm --examine for more detail.
+5) "mkfs.ext4 /dev/md2"
+Output:
+    mke2fs 1.44.6 (5-Mar-2019)
+    Creating filesystem with 292352 1k blocks and 73152 inodes
+    Filesystem UUID: 4a435e3a-0fbe-48b3-86e7-27041a92ccda
+    Superblock backups stored on blocks: 
+        8193, 24577, 40961, 57345, 73729, 204801, 221185
+
+    Allocating group tables: done                            
+    Writing inode tables: done                            
+    Creating journal (8192 blocks): done
+    Writing superblocks and filesystem accounting information: done
+a) "mount /dev/md2 /mnt/"
+b) The array will continue to operate so long as at least one member drive is operational (in RAID 1 level).
+6) "mdadm /dev/md0 -f /dev/loop0"
+Output:
+    mdadm: set /dev/loop0 faulty in /dev/md0
+7) "mdadm /dev/md0 -r /dev/loop0"
+Output:
+    mdadm: hot removed /dev/loop0 from /dev/md0
+   Then do:
+   "umount /mnt"
+   Then do:
+   "sudo mdadm --stop /dev/md0"
+   Then do:
+   "mdadm --assemble --force /dev/md0 /dev/loop[0-3]"
+   Output:
+    mdadm: /dev/md0 has been started with 3 drives (out of 4).
+   Then do:
+   mdadm --manage /dev/md0 --add /dev/loop0
+   Output:
+    mdadm: added /dev/loop0
+
+RAID 10
+1) "mdadm --stop --scan"
+2) "wipefs /dev/loop[0-7]"
+    Output:
+      DEVICE OFFSET TYPE              UUID                                 LABEL
+    loop0  0x1000 linux_raid_member 507ca10d-3ad1-833c-b7d1-df9e86a3d69c server.alunos.dcc.fc.up.pt:0
+    loop1  0x1000 linux_raid_member 507ca10d-3ad1-833c-b7d1-df9e86a3d69c server.alunos.dcc.fc.up.pt:0
+    loop2  0x1000 linux_raid_member 507ca10d-3ad1-833c-b7d1-df9e86a3d69c server.alunos.dcc.fc.up.pt:0
+    loop3  0x1000 linux_raid_member 507ca10d-3ad1-833c-b7d1-df9e86a3d69c server.alunos.dcc.fc.up.pt:0
+    loop4  0x1000 linux_raid_member d4f64b4c-8277-6bb8-34d5-e1d4db27f124 server.alunos.dcc.fc.up.pt:1
+    loop5  0x1000 linux_raid_member d4f64b4c-8277-6bb8-34d5-e1d4db27f124 server.alunos.dcc.fc.up.pt:1
+    loop6  0x1000 linux_raid_member d4f64b4c-8277-6bb8-34d5-e1d4db27f124 server.alunos.dcc.fc.up.pt:1
+    loop7  0x1000 linux_raid_member d4f64b4c-8277-6bb8-34d5-e1d4db27f124 server.alunos.dcc.fc.up.pt:1
+3) "sudo mdadm --create --verbose /dev/md0 --level=10 --raid-devices=4 /dev/loop0 /dev/loop1 /dev/loop2 /dev/loop3"
+Output:
+    mdadm: layout defaults to n2
+    mdadm: layout defaults to n2
+    mdadm: chunk size defaults to 512K
+    mdadm: /dev/loop0 appears to be part of a raid array:
+        level=raid5 devices=4 ctime=Thu Nov 21 16:37:55 2019
+    mdadm: /dev/loop1 appears to be part of a raid array:
+        level=raid5 devices=4 ctime=Thu Nov 21 16:37:55 2019
+    mdadm: /dev/loop2 appears to be part of a raid array:
+        level=raid5 devices=4 ctime=Thu Nov 21 16:37:55 2019
+    mdadm: /dev/loop3 appears to be part of a raid array:
+        level=raid5 devices=4 ctime=Thu Nov 21 16:37:55 2019
+    mdadm: size set to 97792K
+    Continue creating array? y
+    mdadm: Defaulting to version 1.2 metadata
+    mdadm: array /dev/md0 started.
+4) 97792K
+5) "mkfs.ext4 /dev/md0"
+Output:
+    mke2fs 1.44.6 (5-Mar-2019)
+    /dev/md0 contains a linux_raid_member file system labelled 'server.alunos.dcc.fc.up.pt:2'
+    Proceed anyway? (y,N) y
+    Discarding device blocks: done                            
+    Creating filesystem with 195584 1k blocks and 48960 inodes
+    Filesystem UUID: ace4215d-62f7-4094-936c-95fb1bae0b58
+    Superblock backups stored on blocks: 
+        8193, 24577, 40961, 57345, 73729
+
+    Allocating group tables: done                            
+    Writing inode tables: done                            
+    Creating journal (4096 blocks): done
+    Writing superblocks and filesystem accounting information: done
+Then:
+    "mount /dev/md0 /mnt/"
+6) "df -h /dev/md0"
+Output:
+    Filesystem      Size  Used Avail Use% Mounted on
+    /dev/md0        181M  1,6M  167M   1% /mnt
+7,8,9) Repeticao do que foi feito no exercicio anterior
+
+RAID 10 e expansao
+1,2) Repeticao do que foi feito no exercicio anterior
+3)
+a) Vai permitir ter 6 devices no raid em vez dos 4 que foram anteriormente declarados.
+b) Espaco anterior + espacos dos dois novos devices.
+c) O mesmo, so se desmontarmos e montarmos de novo e que altera para o novo tamanho.
+
+

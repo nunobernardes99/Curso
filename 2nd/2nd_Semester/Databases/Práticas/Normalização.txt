@@ -1,0 +1,18 @@
+Ficha 9 - Normalização de BD
+
+1NF: Todos os atributos são indivisíveis
+    - Atributos compostos
+    - Atributos multi-valor
+_________________________________________
+
+    1NF Empresa(Id Dep, NumDep, Rua, Num, CP, Localidade)
+                               |________________________|
+                                1NF : Morada, dividir atributo composto em partes
+    
+    X -> Y, Qualquer que seja r1, r2, r1[X] = r2[X]
+                                   => r1[Y] = r2[Y]
+    IdFunc -> NomeFunc
+    IdDep  -> {NomeDep, Rua, Numero, CP, Localidade}
+    {IdDep, IdTarefa} -> NomeTarefa
+    {IdFunc, IdTarefa} -> HorasTarefa
+    

@@ -1,0 +1,92 @@
+//-- List processing basics
+
+1 - :
+The basic list constructor. Adds an element to the front of a list.
+
+2- ++
+The list concatenator. Adds a list onto the front of another list. Make sure you understand the difference between : and ++
+
+3- head
+Returns the first element of a list.
+
+4 - last
+The opposite of head; last returns the last element of a list.
+
+5 - tail
+The tail of a list is everything except the first element. Returns an error if the list is empty.
+
+6 - init
+The opposite of tail. Given a list, init returns the list without the last element.
+
+7 - length
+Returns the length of the list
+
+8 - !!
+Returns the element of a list located at the specified index. Note that an 'index' starts counting from zero. 
+
+
+
+//-- Extra List Processing
+
+1 - maximum and minimum
+These return the largest and smallest elements of a list repectively. Don't worry too much about the Ord a part of the type signature, but if you must know, then it means that this function only takes inputs of a Type which is deriving Ord. (1) That means that Haskell knows how to put these things in Order. (e.g. 1 < 2, 2 < 5, 'a' < 'z', False < True)
+
+2 - reverse
+reverse takes a list and, um, reverses it
+ 
+3 - elem and notElem
+elem tells you if a specified element is in a list, and notElem is simply the opposite of that. Note that this only works for types which are deriving Eq, (2) meaning that Haskell knows how to say "that element is the same as this one".
+
+4 - concat
+concat takes in a list of lists and combines them all into one list. 
+
+5 - take and drop
+take n [a] gives you the first n elements of the list. Likewise, drop n [a] gives you everything back except the first n elements of a list.
+
+6 - takeWhile and dropWhile
+takeWhile and dropWhile are similar to normal take and drop, but are more powerful - they take in a function (only certain types though) and uses it to 'test' elements of the list starting from the beginning. It will continue to take or drop elements from the list until an element fails the test.
+
+7 - words and unwords
+words takes in a single String and breaks it up wherever there are spaces, into a list of Strings. And unwords does the opposite.
+
+
+
+//-- Arithmetic
+
+1 - `div` and `mod`
+`div` is how many whole times the first number can be divided by the second number. `mod` is the remainder after the first number is divided by the second number. Note that `div` and `mod` only process integers.(4)
+
+2 - gcd and lcm
+gcd stands for Greatest Common Divisor of two numbers. lcm is the Lowest Common Multiple of two numbers. Useful for some Discrete Mathematics algorithms, but not much else.
+
+3 - even and odd
+How many times have you written isEven and isOdd, not realising that they were already inbulit?
+
+
+
+//-- Higher Order functions (important!!)
+
+1 - map http://www.cse.unsw.edu.au/~en1000/haskell/hof.html
+
+2 - filter http://www.cse.unsw.edu.au/~en1000/haskell/hof.html
+
+3 - fold http://www.cse.unsw.edu.au/~en1000/haskell/hof.html
+
+
+
+//-- Tuples
+
+1 - fst and snd
+fst and snd take in a two-element tuple and return the first and second element of that tuple respectively. They have a major drawback in that they only work for two-part tuples. HOWEVER it's an excellent idea to write your own versions of fst and snd for larger tuples when needed, like part2of5, part3of5, part4of5 and so on.
+
+2 - zip and unzip
+zip takes in two lists of (possibly different) things and turns them into a list of 2-element tuples. The first element of each of these tuples comes from the first list, and the second element comes from the second list. The length of this list equals the length of the smaller of the two lists. This is great for storing information which is related to another bit of data, such as Candidates and their number of Votes. And to reverse the process, you feed the tuples into unzip.
+
+
+
+//-- Other functions
+1 - show
+show converts anything which has a Show function defined, into a String.
+
+2 - read
+read is the opposite of show; it reads in a String and converts it to whatever type you specify. Note the way I've used it below!
