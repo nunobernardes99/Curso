@@ -1,9 +1,7 @@
 typedef enum { 
     ADD, MULT 
 } Op;
-
 typedef struct Exp_ *Exp;
-
 struct Exp_ {
     enum {
         IntExp, ExpOp
@@ -17,18 +15,15 @@ struct Exp_ {
         } op;
     } u;
 };
-
 Exp mkNum(int n);
 Exp mkOpExp(Op o, Exp l, Exp r);
 int interp(Exp e);
-
 Exp mkNum(int n) {
     Exp p = malloc(sizeof(*p));
     p -> kind = IntExp;
     p -> u.num = n;
     return p;
 }
-
 Exp mkOpExp(Op o, Exp l, Exp r) {
     Exp p = malloc(sizeof(*p));
     p -> kind = ExpOp;
